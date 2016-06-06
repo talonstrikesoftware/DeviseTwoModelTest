@@ -1,0 +1,26 @@
+<h2>Admins/Registrations/new Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: admin_registration_path()) do |f| %>
+    <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      <% if @validatable %>
+          <span class="help-block"><%= @minimum_password_length %> characters minimum</span>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+    </div>
+
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
+<% end %>
+
+<%= render "admins/shared/links" %>

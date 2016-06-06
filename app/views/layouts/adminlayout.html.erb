@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeviseTwoModelTest</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbr-header">
+      <ul class="nav navbar-nav">
+        <% if admin_signed_in? %>
+            <% if action_name != 'index' %>
+                <li><%= link_to 'Admin Home', root_path %></li>
+            <% end %>
+            <% if action_name != 'secret' %>
+              <li><%= link_to 'Admin Secret', adminsecret_path %></li>
+            <% end %>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <% if admin_signed_in? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_admin.email %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <!--<li><= link_to 'Admin Profile', edit_admin_registration_path %></li> %> -->
+              <li><%= link_to 'Admin Log out', destroy_admin_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>
+            <% if action_name != 'new' %>
+              <li><%= link_to 'Admin Log In', new_admin_session_path %></li>
+            <% end %>
+          <li><%= link_to 'Admin Sign Up', new_admin_registration_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+      <% end %>
+</div>
+
+<%= yield :top_content %>
+
+<div class="container">
+  <h1><%= yield :header %></h1>
+  <%= yield %>
+</div>
+
+</body>
+</html>

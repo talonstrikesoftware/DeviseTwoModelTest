@@ -1,0 +1,13 @@
+<% content_for :top_content do %>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>/views/pages/index User Welcome!</h1>
+      <% if !user_signed_in? %>
+        <p>Register to get started.</p>
+        <p>
+          <%= link_to 'User Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+<% end %>
